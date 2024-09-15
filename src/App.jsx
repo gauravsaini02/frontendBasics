@@ -17,10 +17,23 @@ function App() {
 
   return (
         
-      <div>
-        <button onClick={clickhandler}>counter{count}</button>
+    <div>
+        <CustomButton count={count} setCount={setCount}></CustomButton>
+        <CustomButton count={count-1} setCount={setCount}></CustomButton>
     </div> 
   )
-}
 
+  // component
+
+  function CustomButton(props){
+
+    function onclickhandler(){
+      props.setCount(props.count+1);
+    } 
+
+    return(
+      <button onClick={onclickhandler} > Counter{props.count}</button>
+    )
+}
+}
 export default App
