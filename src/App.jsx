@@ -3,37 +3,42 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-let state = {
-  count:0 
-}
+// minimise rerendering by pushing the state down
 
 function App() {
-  const [count, setCount] = useState(0);
+  
 
-  function clickhandler(){
-    setCount(count+1);
 
-  }
 
+   
   return (
-        
-    <div>
-        <CustomButton count={count} setCount={setCount}></CustomButton>
-        <CustomButton count={count-1} setCount={setCount}></CustomButton>
-    </div> 
+        <div>
+            <HeaderWithButton></HeaderWithButton>
+            <Header title="gaurav1"></Header>
+            <Header title="gaurav2"></Header>
+        </div>
+    
   )
-
-  // component
-
-  function CustomButton(props){
-
-    function onclickhandler(){
-      props.setCount(props.count+1);
-    } 
-
-    return(
-      <button onClick={onclickhandler} > Counter{props.count}</button>
-    )
+   
 }
+
+function HeaderWithButton(){
+    const [title, setTitle] = useState("My name is Gaurav");
+    function updateTitle(){
+
+        setTitle("my name is" + Math.random())
+    }
+
+    return <div>
+        <button onClick={updateTitle}>Update the title</button>
+        <Header title={title}></Header>
+
+    </div>
 }
+
+function Header({title}){
+    return <div>{title}</div>
+}
+
+
 export default App
