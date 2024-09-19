@@ -3,37 +3,45 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { memo,useCallback,useEffect,useState } from 'react'
+import { Dashboard } from '../components/Dashboard'
+import { Landing } from '../components/Landing'
+import {BrowserRouter, Routes,Route, useNavigate} from 'react-router-dom'
 
-
-// usecallback functionality 
+// usenavigate for react router dom
 
 function App() {
-    
-const [counter,setCounter] = useState(0);
+    return (
+      <>
+        <BrowserRouter>
+          <Appbar/>
+          <Routes>
+            <Route path='/Dashboard' element={<Dashboard />} />
+            <Route path='/' element={<Landing />} />
+          </Routes>
+        </BrowserRouter>
+      </>
+    )
+  }
 
-    var a = useCallback(function (){
-        console.log("hello a called")
-    },[]  )
-  
-  return (
+function Appbar(){
+    const navigate = useNavigate();
+
+    return <div>
         <div>
-                <button onClick={()=> {
-                    setCounter(counter+1);
-                }}> Counter ({counter})</button>
+            <button onClick={()=>{
+                navigate("/")
+            }}>Landing page</button>
 
-                <Demo a={a} />
-        </div>
-    
-  )
-   
+            <button onClick={()=> {
+                navigate("/Dashboard")
+            }}>Dashboard Page</button>
+
+    </div>
+
+    </div>
 }
 
-const Demo = memo(function({a}){
-    console.log("rerender")
-    return <div>
-        hi there {a}
-    </div>
-})
+
 
 
 
